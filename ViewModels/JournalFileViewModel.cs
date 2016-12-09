@@ -1,14 +1,15 @@
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using explorer_api.Models;
 using explorer_api.ViewModels.Validations;
 using FluentValidation;
-using FluentValidation.Results;
+using ValidationContext = System.ComponentModel.DataAnnotations.ValidationContext;
 
 namespace explorer_api.ViewModels
 {
-    public class JournalFileViewModel
+    public class JournalFileViewModel: IValidatableObject
     {
         public int Id { get; set; }
 
@@ -23,9 +24,9 @@ namespace explorer_api.ViewModels
         public ApplicationUser User { get; set; }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext) {
-            var validator = new JournalViewModelValidator();
+            var validator = new JournalFileViewModelValidator();
             var result = validator.Validate(this);
-            return new [] {result};
+            return result.Errors.Select(item => new ValidationResult(item.ErrorMessage, new[] { item.PropertyName }));
         }
     }
 }
