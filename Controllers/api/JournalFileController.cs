@@ -83,7 +83,21 @@ namespace explorer_api.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(new {message=ex.Message, stacktrace=ex.StackTrace, innerExceptionMessage=ex.InnerException.Message, innerExceptionStackTrace=ex.InnerException.StackTrace});
+                if (ex.Message == "An error occurred while updating the entries. See the inner exception for details.")
+                {
+                    if (ex.InnerException.Message ==
+                        "23505: duplicate key value violates unique constraint \"AlternateKey_FileName\"")
+                    {
+                        return BadRequest(new {result = "error", message = "FileName already exists"});
+                    }
+                }
+                return BadRequest(new
+                {
+                    message=ex.Message,
+                    stacktrace=ex.StackTrace,
+                    innerExceptionMessage=ex.InnerException.Message,
+                    innerExceptionStackTrace=ex.InnerException.StackTrace
+                });
             }
             //newJournalFile.User = _user;
             journalFile = Mapper.Map<JournalFile, JournalFileViewModel>(newJournalFile);
