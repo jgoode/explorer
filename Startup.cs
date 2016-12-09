@@ -12,6 +12,8 @@ using Microsoft.Extensions.Logging;
 using explorer_api.Data;
 using explorer_api.Models;
 using explorer_api.Services;
+using explorer_api.Repository;
+using explorer_api.ViewModels.Mappings;
 
 namespace explorer_api
 {
@@ -56,6 +58,14 @@ namespace explorer_api
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
+
+            services.AddScoped<IJournalFileRepository, JournalFileRepository>();
+            services.AddScoped<IJournalRepository, JournalRepository>();
+
+            AutoMapperConfiguration.Configure();
+            // Enable Cors
+            services.AddCors();
+
         }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
@@ -76,11 +86,22 @@ namespace explorer_api
 
             app.UseStaticFiles();
 
+            app.UseCors(builder =>
+                builder.AllowAnyOrigin()
+                .AllowAnyHeader()
+                .AllowAnyMethod());
+
             //app.UseIdentity();
 
             // Add external authentication middleware below. To configure them please see https://go.microsoft.com/fwlink/?LinkID=532715
 
-            app.UseMvc();
+            app.UseMvc(routes =>
+            {
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}");
+
+            });
         }
     }
 }

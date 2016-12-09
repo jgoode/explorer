@@ -4,7 +4,7 @@ using explorer_api.Models;
 using System;
 
 namespace explorer_api.Models {
-    public class JournalFile {
+    public class JournalFile: IEntityBase {
         public int Id { get; set; }
 
         public string FileName { get; set; }
