@@ -93,6 +93,7 @@ namespace explorer_api.Controllers
                 }
                 return BadRequest(new
                 {
+                    result="error",
                     message=ex.Message,
                     stacktrace=ex.StackTrace,
                     innerExceptionMessage=ex.InnerException.Message,
@@ -104,6 +105,7 @@ namespace explorer_api.Controllers
 
             return Ok(new
             {
+                result="ok",
                 commander=_user.UserName,
                 fileId = journalFile.Id,
                 file=journalFile.FileName,

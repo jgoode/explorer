@@ -6,6 +6,7 @@ namespace explorer_api.ViewModels.Mappings {
         protected override void Configure()
         {
             CreateMap<JournalFile, JournalFileViewModel>() ;
+            CreateMap<Journal, JournalViewModel>();
         }
     }
 }

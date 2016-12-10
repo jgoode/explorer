@@ -5,6 +5,7 @@ namespace explorer_api.ViewModels.Mappings {
     public class ViewModelToDomainMappingProfile: Profile {
         protected override void Configure() {
             CreateMap<JournalFileViewModel, JournalFile>();
+            CreateMap<JournalViewModel, Journal>();
         }
     }
 }
