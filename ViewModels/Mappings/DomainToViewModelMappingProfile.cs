@@ -7,6 +7,7 @@ namespace explorer_api.ViewModels.Mappings {
         {
             CreateMap<JournalFile, JournalFileViewModel>() ;
             CreateMap<Journal, JournalViewModel>();
+            CreateMap<Expedition, ExpeditionViewModel>();
         }
     }
 }

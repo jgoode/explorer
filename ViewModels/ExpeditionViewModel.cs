@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 
-namespace explorer_api.Models
+namespace explorer_api.ViewModels
 {
-    public class Expedition: IEntityBase
+    public class ExpeditionViewModel
     {
         public int Id { get; set; }
 
@@ -24,11 +23,9 @@ namespace explorer_api.Models
         public double TotalCredits { get; set; }
 
         public string UserId { get; set; }
-        
+
         public DateTime Updated { get; set; }
 
         public DateTime Created { get; set; }
-
-        public List<StarSystem> StarSystems { get; set; }
     }
 }

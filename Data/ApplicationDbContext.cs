@@ -13,6 +13,9 @@ namespace explorer_api.Data
     {
         public DbSet<JournalFile> JournalFiles { get; set; }
         public DbSet<Journal> Journals { get; set; }
+        public DbSet<Expedition> Expeditions { get; set; }
+        public DbSet<StarSystem> StarSystems { get; set; }
+
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -33,11 +36,19 @@ namespace explorer_api.Data
         
         protected override void OnModelCreating(ModelBuilder builder)
         {
-
             base.OnModelCreating(builder);
             // Customize the ASP.NET Identity model and override the defaults if needed.
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
+
+            builder.Entity<JournalFile>()
+                .HasAlternateKey(c => c.FileName)
+                .HasName("AlternateKey_FileName");
+
+            builder.Entity<StarSystem>()
+                .HasOne(p => p.Expedition)
+                .WithMany(p => p.StarSystems)
+                .HasForeignKey(p => p.ExpeditionId);
         }
     }
 }

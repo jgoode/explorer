@@ -8,9 +8,10 @@ using explorer_api.Data;
 namespace explorer_api.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20161211115350_Migration8")]
+    partial class Migration8
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.0.0-rtm-21431");
@@ -140,44 +141,6 @@ namespace explorer_api.Data.Migrations
                     b.ToTable("JournalFiles");
                 });
 
-            modelBuilder.Entity("explorer_api.Models.StarSystem", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Allegiance");
-
-                    b.Property<DateTime>("Created");
-
-                    b.Property<string>("Economy");
-
-                    b.Property<int>("ExpeditionId");
-
-                    b.Property<double>("FuelUsed");
-
-                    b.Property<double>("FuleUsed");
-
-                    b.Property<string>("Government");
-
-                    b.Property<double>("JumpDistance");
-
-                    b.Property<string>("Security");
-
-                    b.Property<DateTime>("Updated");
-
-                    b.Property<double>("X");
-
-                    b.Property<double>("Y");
-
-                    b.Property<double>("Z");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ExpeditionId");
-
-                    b.ToTable("StarSystems");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole", b =>
                 {
                     b.Property<string>("Id");
@@ -298,14 +261,6 @@ namespace explorer_api.Data.Migrations
                     b.HasOne("explorer_api.Models.ApplicationUser", "User")
                         .WithMany("JournalFiles")
                         .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("explorer_api.Models.StarSystem", b =>
-                {
-                    b.HasOne("explorer_api.Models.Expedition", "Expedition")
-                        .WithMany("StarSystems")
-                        .HasForeignKey("ExpeditionId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>
