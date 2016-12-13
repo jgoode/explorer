@@ -15,7 +15,7 @@ namespace explorer_api.Data
         public DbSet<Journal> Journals { get; set; }
         public DbSet<Expedition> Expeditions { get; set; }
         public DbSet<StarSystem> StarSystems { get; set; }
-
+        public DbSet<SystemObject> SystemObjects { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
@@ -49,6 +49,11 @@ namespace explorer_api.Data
                 .HasOne(p => p.Expedition)
                 .WithMany(p => p.StarSystems)
                 .HasForeignKey(p => p.ExpeditionId);
+
+            builder.Entity<SystemObject>()
+                .HasOne(p => p.StarSystem)
+                .WithMany(p => p.SystemObjects)
+                .HasForeignKey(p => p.StarSystemId);
         }
     }
 }

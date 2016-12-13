@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace explorer_api.Models
 {
     public class StarSystem: IEntityBase
     {
         public int Id { get; set; }
+
+        public string Name { get; set; }
 
         public double X { get; set; }
 
@@ -33,5 +36,7 @@ namespace explorer_api.Models
         public DateTime Updated { get; set; }
 
         public DateTime Created { get; set; }
+
+        public List<SystemObject> SystemObjects { get; set; }
     }
 }

@@ -62,6 +62,7 @@ namespace explorer_api
             services.AddScoped<IJournalFileRepository, JournalFileRepository>();
             services.AddScoped<IJournalRepository, JournalRepository>();
             services.AddScoped<IExpeditionRepository, ExpeditionRepository>();
+            services.AddScoped<IStarSystemRepository, StarSystemRepository>();
 
             AutoMapperConfiguration.Configure();
             // Enable Cors
